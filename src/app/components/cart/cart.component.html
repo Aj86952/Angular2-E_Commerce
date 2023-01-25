@@ -1,0 +1,82 @@
+<ng-container *ngIf="newProductList?.length">
+  <div class="card-table">
+    <div class="card-product">
+      <table class="table table-responsive container">
+        <thead>
+          <tr>
+            <th style="width: 5px">S.No.</th>
+            <th style="width: 15px">Product Name</th>
+            <th style="width: 25px">Product Image</th>
+            <th style="width: 25px">Description</th>
+            <th style="width: 12px">Price</th>
+            <th style="width: 13px">Rating</th>
+            <th style="width: 5px">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of newProductList; let i = index">
+            <td style="width: 5px">{{ i + 1 }}</td>
+            <td style="width: 15px">{{ item.title }}</td>
+            <td><img style="width: 100px" src="{{ item.image }}" /></td>
+            <td style="width: 25px">
+              <textarea cols="25" rows="5">{{ item.description }}</textarea>
+            </td>
+            <td style="width: 12px">{{ item.price }}</td>
+            <td style="width: 13px">{{ item.rating.rate }}</td>
+
+            <td style="width: 5px">
+              <button
+                (click)="removeItem(item)"
+                type="button"
+                class="btn btn-sm btn-danger"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+          <tr style="margin-top: 50px">
+            <td class="col-md-1"></td>
+            <td class="col-md-3">
+              <button class="btn btn-sm btn-danger" (click)="emptyCart()">
+                Empty cart
+              </button>
+            </td>
+            <td class="col-md-2">
+              <button class="btn btn-sm btn-primary" routerLink="/product">
+                Shop more
+              </button>
+            </td>
+            <div>
+              <td class="col-md-2">
+                <button class="btn btn-sm btn-success">Checkout</button>
+              </td>
+              <td class="col-4">
+                <b>Grand Total : ${{ grandTotal }}</b>
+              </td>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!newProductList?.length">
+  <div
+    class="container d-flex justify-content-center"
+    style="margin-top: 120px"
+  >
+    <div class="center">
+      <h4>Your cart is empty..!</h4>
+      <h6 style="margin-left: 40px">Add item to it now</h6>
+      <button
+        class="btn btn-info"
+        style="margin-left: 60px"
+        type="button"
+        routerLink="/product"
+      >
+        Shop Now
+      </button>
+    </div>
+  </div>
+</ng-container>
